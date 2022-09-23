@@ -1,6 +1,5 @@
 package pro.gravit.launcher.client.gui.scenes.login.methods;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import pro.gravit.launcher.client.gui.JavaFXApplication;
@@ -80,7 +79,7 @@ public class TotpAuthMethod extends AbstractAuthMethod<AuthTotpDetails> {
 
         @Override
         protected void doInit() {
-            Pane sub = (Pane) LookupHelper.<Button>lookup(layout, "#auth2fa", "#authButton").getGraphic();
+            Pane sub = LookupHelper.lookup(layout, "#loginbg", "#totpText");
             textFields = new TextField[6];
             for (int i = 0; i < 6; ++i) {
                 textFields[i] = LookupHelper.lookup(sub, "#" + (i + 1) + "st");

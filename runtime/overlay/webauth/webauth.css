@@ -1,6 +1,36 @@
-/*-- DrLeonardo styles refactor --*/
+/*
+FluffyCuteOwO#6745 - DarkenGravitLauncherRuntime
+*/
 
 @import "../../styles/global.css";
 @import "../../styles/variables.css";
+/* global */
+#logo {
+    -fx-background-image: url('../../images/components/global/logo.png');
+    -fx-background-size: cover;
+}
+#loginbg{
+    -fx-background-color: #1C1E20;
+    -fx-background-radius: 8px;
+    -fx-border-color: #424242;
+    -fx-border-radius: 8px;
+}
+/* end global */
 
-/*-- DrLeonardo styles refactor --*/
+/* loginpassword.fxml */
+#backtext{
+    -fx-font-size: 12px;
+    -fx-fill: #FFFFFF;
+    -fx-font-family: "Manrope Medium";
+    -fx-align-items: center;
+}
+#backbutton{
+    -fx-background-color: #202020;
+    -fx-background-radius: 4px;
+    -fx-border-color: #282828;
+    -fx-border-radius: 4px;
+}
+#backbutton:hover{
+    -fx-background-color: #222222;
+}
+/* end loginpassword.fxml */

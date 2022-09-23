@@ -5,89 +5,100 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.TextFlow?>
 
 <!-- DrLeonardo refactor -->
 
-<?import javafx.scene.text.TextFlow?>
 <Pane fx:id="loginPane" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-     <Pane fx:id="layout" prefHeight="600.0" prefWidth="1024.0">
+    <Pane fx:id="layout" prefHeight="600.0" prefWidth="1024.0">
 
-         <!-- Навбар -->
-      <Pane id="header" prefHeight="600.0" prefWidth="1024.0">
-         <children>
-            <Pane id="backgroundimage" prefHeight="600.0" prefWidth="1024.0" />
+        <!-- Навбар -->
+        <Pane id="header" prefHeight="600.0" prefWidth="1024.0">
+            <children>
+                <Pane id="backgroundimage" prefHeight="600.0" prefWidth="1024.0" />
 
-             <!-- Кнопки управления -->
-            <Pane id="controls" prefHeight="60.0" prefWidth="1024.0">
-               <children>
-                  <Pane id="logo" layoutX="439.0" layoutY="22.0" prefHeight="16.0" prefWidth="16.0" />
-                   <TextFlow layoutX="465.0" layoutY="20.0" lineSpacing="162.0">
-                       <children>
-                           <Label id="title" text="%runtime.scenes.login.logoName" />
-                           <Label id="title" text="%runtime.scenes.login.logoProduct" />
-                       </children>
-                   </TextFlow>
+                <!-- Кнопки управления -->
+                <Pane id="controls" prefHeight="60.0" prefWidth="1024.0">
+                    <children>
+                        <Pane id="logo" layoutX="439.0" layoutY="22.0" prefHeight="16.0" prefWidth="16.0" />
+                        <TextFlow layoutX="465.0" layoutY="20.0" lineSpacing="162.0">
+                            <children>
+                                <Label id="title" text="%runtime.scenes.login.logoName" />
+                                <Label id="title" text="%runtime.scenes.login.logoProduct" />
+                            </children>
+                        </TextFlow>
 
-                   <!-- Кнопка закрыть -->
-                   <Button id="exit" graphicTextGap="0.0" layoutX="994.0" layoutY="25.0" maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="10.0" styleClass="icon-button">
-                       <graphic>
-                           <SVGPath content="M1 1L6 6M11 11L6 6M6 6L1 11L11 1" stroke="#b6b6bb" strokeLineCap="BUTT" strokeWidth="2.0" styleClass="icon-button-color" />
-                       </graphic>
-                       <tooltip>
-                           <Tooltip id="exitTooltip" text="%runtime.scenes.login.exitTooltip" />
-                       </tooltip>
-                   </Button>
-
-                   <!-- Кнопка свернуть -->
-                   <Button id="minimize" layoutX="948.0" layoutY="24.0" maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="10.0" styleClass="icon-button">
-                       <graphic>
-                           <SVGPath content="M0 1H10" stroke="#b6b6bb" strokeWidth="2.0" />
-                       </graphic>
-                       <tooltip>
-                           <Tooltip id="minimizeTooltip" text="%runtime.scenes.login.minimizeTooltip" />
-                       </tooltip>
-                   </Button>
-               </children>
-            </Pane>
-            <Pane id="loginbg" layoutX="342.0" layoutY="155.0" prefHeight="290.0" prefWidth="340.0">
-               <children>
-                  <Label id="welcometext" alignment="CENTER" layoutY="85.0" prefHeight="35.0" prefWidth="340.0" text="%runtime.scenes.login.welcomeText" />
-                  <Label id="selectauthtext" alignment="CENTER" layoutY="123.0" prefHeight="20.0" prefWidth="340.0" text="%runtime.scenes.login.authChoosingText" textAlignment="CENTER" />
-               </children>
-            </Pane>
-      
-                                 <!-- Блок атворизации -->
-            <Pane id="authButtonBlock" fx:id="auth" layoutX="371.0" layoutY="315.0">
-               <children>
-                  <Pane id="authUnactive" maxHeight="44.0" maxWidth="282.0" minHeight="44.0" minWidth="282.0" prefHeight="44.0" prefWidth="282.0" />
-      
-                                     <!-- Активная кнопка -->
-                  <Pane id="authActive" maxHeight="44.0" maxWidth="282.0" minHeight="44.0" minWidth="282.0" prefHeight="44.0" prefWidth="282.0" styleClass="authActive">
-                     <children>
-                           <Button id="authButton" alignment="CENTER" cacheShape="false" cancelButton="true" centerShape="false" contentDisplay="CENTER" defaultButton="true" graphicTextGap="0.0" maxHeight="44.0" maxWidth="282.0" minHeight="44.0" minWidth="282.0" prefHeight="44.0" prefWidth="282.0" scaleShape="false" snapToPixel="false" styleClass="wow">
-                           <graphic>
-                              <Pane id="panebuttonauth" maxHeight="44.0" maxWidth="282.0" minHeight="44.0" minWidth="282.0" prefHeight="44.0" prefWidth="282.0">
-                                 <children>
-                                    <Pane id="logobutton" layoutX="14.0" layoutY="13.0" prefHeight="18.0" prefWidth="18.0" />
-                                    <Label id="authbuttontext" ellipsisString="214" layoutX="43.0" layoutY="13.0" lineSpacing="214.0" text="Авторизоваться с помощью ICECREAM ID" />
-                                 </children>
-                              </Pane>
-                           </graphic>
+                        <!-- Кнопка закрыть -->
+                        <Button id="exit" graphicTextGap="0.0" layoutX="994.0" layoutY="25.0" maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="10.0" styleClass="icon-button">
+                            <graphic>
+                                <SVGPath content="M1 1L6 6M11 11L6 6M6 6L1 11L11 1" stroke="#b6b6bb" strokeLineCap="BUTT" strokeWidth="2.0" styleClass="icon-button-color" />
+                            </graphic>
+                            <tooltip>
+                                <Tooltip id="exitTooltip" text="%runtime.scenes.login.exitTooltip" />
+                            </tooltip>
                         </Button>
-                     </children>
-                  </Pane>
-                   
-                                 </children>
-            </Pane>
-         </children>
-      </Pane>
-     </Pane>
-   <Pane id="player" layoutX="462.0" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" visible="false">
-      <children>
-         <Pane id="start" layoutX="32.0" layoutY="32.0" prefHeight="36.0" prefWidth="36.0" />
-      </children>
-   </Pane>
+
+                        <!-- Кнопка свернуть -->
+                        <Button id="minimize" layoutX="948.0" layoutY="24.0" maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="10.0" styleClass="icon-button">
+                            <graphic>
+                                <SVGPath content="M0 1H10" stroke="#b6b6bb" strokeWidth="2.0" />
+                            </graphic>
+                            <tooltip>
+                                <Tooltip id="minimizeTooltip" text="%runtime.scenes.login.minimizeTooltip" />
+                            </tooltip>
+                        </Button>
+                    </children>
+                </Pane>
+                <Pane id="loginbg" layoutX="342.0" layoutY="155.0" prefHeight="290.0" prefWidth="340.0">
+                    <children>
+                        <Label id="welcometext" alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="340.0" text="%runtime.scenes.login.welcomeText" />
+                        <Label id="selectauthtext" alignment="CENTER" layoutY="52.0" prefHeight="20.0" prefWidth="340.0" text="%runtime.scenes.login.authChoosingText" textAlignment="CENTER" />
+                    </children>
+                </Pane>
+
+                <!-- Блок атворизации -->
+                <VBox fx:id="authList" layoutX="371.0" layoutY="255.0" spacing="10">
+<!--                    <Pane id="authButtonBlock" fx:id="auth">-->
+<!--                        <children>-->
+<!--                            <Pane id="authUnactive" maxHeight="44.0" maxWidth="282.0" minHeight="44.0" minWidth="282.0"-->
+<!--                                  prefHeight="44.0" prefWidth="282.0"/>-->
+<!--                            &lt;!&ndash; Активная кнопка &ndash;&gt;-->
+<!--                            <Pane id="authActive" maxHeight="44.0" maxWidth="282.0" minHeight="44.0" minWidth="282.0"-->
+<!--                                  prefHeight="44.0" prefWidth="282.0" styleClass="authActive">-->
+<!--                                <children>-->
+<!--                                    <Button id="authButton" alignment="CENTER" cacheShape="false" cancelButton="true"-->
+<!--                                            centerShape="false" contentDisplay="CENTER" defaultButton="true"-->
+<!--                                            graphicTextGap="0.0" maxHeight="44.0" maxWidth="282.0" minHeight="44.0"-->
+<!--                                            minWidth="282.0" prefHeight="44.0" prefWidth="282.0" scaleShape="false"-->
+<!--                                            snapToPixel="false" styleClass="wow">-->
+<!--                                        <graphic>-->
+<!--                                            <Pane id="panebuttonauth" maxHeight="44.0" maxWidth="282.0" minHeight="44.0"-->
+<!--                                                  minWidth="282.0" prefHeight="44.0" prefWidth="282.0">-->
+<!--                                                <children>-->
+<!--                                                    <Pane id="logobutton" layoutX="14.0" layoutY="13.0"-->
+<!--                                                          prefHeight="18.0" prefWidth="18.0"/>-->
+<!--                                                    <Label id="authbuttontext" ellipsisString="214" layoutX="43.0"-->
+<!--                                                           layoutY="13.0" lineSpacing="214.0"-->
+<!--                                                           text="ICECREAM ID"/>-->
+<!--                                                </children>-->
+<!--                                            </Pane>-->
+<!--                                        </graphic>-->
+<!--                                    </Button>-->
+<!--                                </children>-->
+<!--                            </Pane>-->
+<!--                        </children>-->
+<!--                    </Pane>-->
+                </VBox>
+            </children>
+        </Pane>
+    </Pane>
+    <Pane id="player" layoutX="462.0" layoutY="250.0" prefHeight="100.0" prefWidth="100.0" visible="false">
+        <children>
+            <Pane id="start" layoutX="32.0" layoutY="32.0" prefHeight="36.0" prefWidth="36.0" />
+        </children>
+    </Pane>
 
     <!-- Подключение стилей-->
     <stylesheets>
