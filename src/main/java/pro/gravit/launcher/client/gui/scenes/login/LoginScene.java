@@ -6,18 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 import pro.gravit.launcher.LauncherEngine;
 import pro.gravit.launcher.client.events.ClientExitPhase;
 import pro.gravit.launcher.client.gui.JavaFXApplication;
 import pro.gravit.launcher.client.gui.helper.LookupHelper;
-import pro.gravit.launcher.client.gui.impl.AbstractStage;
 import pro.gravit.launcher.client.gui.overlays.AbstractOverlay;
 import pro.gravit.launcher.client.gui.scenes.AbstractScene;
 import pro.gravit.launcher.client.gui.scenes.login.methods.*;
@@ -41,23 +34,18 @@ import pro.gravit.launcher.request.update.LauncherRequest;
 import pro.gravit.launcher.request.update.ProfilesRequest;
 import pro.gravit.utils.helper.LogHelper;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
-
 public class LoginScene extends AbstractScene {
     public Map<Class<? extends GetAvailabilityAuthRequestEvent.AuthAvailabilityDetails>, AbstractAuthMethod<? extends GetAvailabilityAuthRequestEvent.AuthAvailabilityDetails>> authMethods = new HashMap<>(8);
     public boolean isLoginStarted;
     private List<GetAvailabilityAuthRequestEvent.AuthAvailability> auth;
     private Boolean savePass = false;
-    private LoginAuthButtonComponent authButton;
+    private LoginVBoxAuthButtonComponent authButton;
     private final AuthService authService = new AuthService(application);
     private VBox authList;
     private ToggleGroup authToggleGroup;
@@ -85,7 +73,7 @@ public class LoginScene extends AbstractScene {
 //            }});
 //        mediaPlayer.play();
         new ZoomIn(LookupHelper.lookupIfPossible(layout, "#header").orElse(null)).setSpeed(0.2).play();
-        authButton = new LoginAuthButtonComponent(LookupHelper.lookup(layout, "#authButtonBlock"), application, (e) -> contextHelper.runCallback(this::loginWithGui));
+        //authButton = new LoginAuthButtonComponent(LookupHelper.lookup(layout, "#authButtonBlock"), application, (e) -> contextHelper.runCallback(this::loginWithGui));
         if (application.runtimeSettings.password != null || application.runtimeSettings.oauthAccessToken != null) {
             savePass = true;
         }
@@ -93,6 +81,7 @@ public class LoginScene extends AbstractScene {
 //        if (application.guiModuleConfig.forgotPassURL != null)
 //            LookupHelper.<Text>lookup(header, "#controls", "#links", "#forgotPass").setOnMouseClicked((e) ->
 //                    application.openURL(application.guiModuleConfig.forgotPassURL));
+        authList = LookupHelper.lookup(layout, "#authList");
         authToggleGroup = new ToggleGroup();
         authMethods.forEach((k, v) -> v.prepare());
         // Verify Launcher
@@ -165,29 +154,34 @@ public class LoginScene extends AbstractScene {
         LogHelper.info("Selected auth: %s", authAvailability.name);
     }
 
+    public void setAuthButton(LoginVBoxAuthButtonComponent authButton) {
+        this.authButton = authButton;
+    }
+
     public void addAuthAvailability(GetAvailabilityAuthRequestEvent.AuthAvailability authAvailability) {
-        RadioButton radio = new RadioButton();
-        radio.setToggleGroup(authToggleGroup);
-        radio.setId("authRadio");
-        radio.setText(authAvailability.displayName);
-        if (this.authAvailability == authAvailability) {
-            radio.fire();
-        }
-        radio.setOnAction((e) -> {
+        LoginVBoxAuthButtonComponent component = new LoginVBoxAuthButtonComponent(authAvailability.name, authAvailability.displayName, application);
+        component.setOnAction((e) -> {
+            setAuthButton(component);
             changeAuthAvailability(authAvailability);
+            contextHelper.runCallback(this::loginWithGui);
         });
+        //if (this.authAvailability == authAvailability) {
+        //    component.fire();
+        //}
         LogHelper.info("Added %s: %s", authAvailability.name, authAvailability.displayName);
+        authList.getChildren().add(component.getLayout());
+        setAuthButton(component);
     }
 
     private volatile boolean processingEnabled = false;
 
     public <T extends WebSocketEvent> void processing(Request<T> request, String text, Consumer<T> onSuccess, Consumer<String> onError) {
-        Pane root = (Pane) scene.getRoot();
+        //Pane root = (Pane) scene.getRoot();
         LookupHelper.Point2D authAbsPosition = LookupHelper.getAbsoluteCords(authButton.getLayout(), layout);
         LogHelper.debug("X: %f, Y: %f", authAbsPosition.x, authAbsPosition.y);
-        double authLayoutX = authButton.getLayout().getLayoutX();
-        double authLayoutY = authButton.getLayout().getLayoutY();
-        String oldText = authButton.getText();
+        //double authLayoutX = authButton.getLayout().getLayoutX();
+        //double authLayoutY = authButton.getLayout().getLayoutY();
+        //String oldText = authButton.getText();
         if (!processingEnabled) {
             contextHelper.runInFxThread(() -> {
                 disable();
@@ -204,14 +198,12 @@ public class LoginScene extends AbstractScene {
         });
         Runnable processingOff = () -> {
             if (!processingEnabled) return;
-            contextHelper.runInFxThread(() -> {
-                enable();
-//                root.getChildren().remove(authButton.getLayout());
-//                layout.getChildren().add(authButton.getLayout());
-//                authButton.getLayout().setLayoutX(authLayoutX);
-//                authButton.getLayout().setLayoutY(authLayoutY);
-//                authButton.setText(oldText);
-            });
+            //                root.getChildren().remove(authButton.getLayout());
+            //                layout.getChildren().add(authButton.getLayout());
+            //                authButton.getLayout().setLayoutX(authLayoutX);
+            //                authButton.getLayout().setLayoutY(authLayoutY);
+            //                authButton.setText(oldText);
+            contextHelper.runInFxThread(this::enable);
             processingEnabled = false;
             //           authButton.disable();
         };
@@ -234,20 +226,17 @@ public class LoginScene extends AbstractScene {
     @Override
     public void errorHandle(Throwable e) {
         super.errorHandle(e);
-        Pane root = (Pane) scene.getRoot();
-        double authLayoutX = authButton.getLayout().getLayoutX();
-        double authLayoutY = authButton.getLayout().getLayoutY();
+        //double authLayoutX = authButton.getLayout().getLayoutX();
+        //double authLayoutY = authButton.getLayout().getLayoutY();
         if (!processingEnabled) return;
-        contextHelper.runInFxThread(() -> {
-            enable();
-//            root.getChildren().remove(authButton.getLayout());
-//            layout.getChildren().add(authButton.getLayout());
-            //authButton.getLayout().setLayoutX(authLayoutX);
-            //
-            // .getLayout().setLayoutY(authLayoutY);
-            //authButton.setText("ERROR");
-            //authButton.setError();
-        });
+        //            root.getChildren().remove(authButton.getLayout());
+        //            layout.getChildren().add(authButton.getLayout());
+        //authButton.getLayout().setLayoutX(authLayoutX);
+        //
+        // .getLayout().setLayoutY(authLayoutY);
+        //authButton.setText("ERROR");
+        //authButton.setError();
+        contextHelper.runInFxThread(this::enable);
         authButton.enable();
         processingEnabled = false;
     }

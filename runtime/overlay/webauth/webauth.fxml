@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
 <!-- DrLeonardo refactor -->
 
-<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" >
+<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 
+    <Pane id="loginbg">
     <!-- Описание браузера -->
-    <Label id="headerDescription" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="62.0" prefWidth="600.0" text="%runtime.overlay.webauth.webauth.web-description" textAlignment="CENTER" />
+        <Pane id="logo" layoutX="175.0" layoutY="22.0" prefHeight="16.0" prefWidth="16.0" />
+        <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="62.0" prefWidth="600.0" text="%runtime.overlay.webauth.webauth.web-description" textAlignment="CENTER" />
 
     <!-- Кнопки управления -->
-    <Button id="exit" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" layoutX="490.0" layoutY="10.0" styleClass="icon-button" textOverrun="CLIP">
-        <graphic>
-            <Pane>
-                <children>
-                    <Text fontSmoothingType="LCD" layoutX="2.0" layoutY="19.0" strokeType="OUTSIDE" styleClass="header-button-text" text="%runtime.overlay.webauth.webauth.header-button-text" textAlignment="CENTER" wrappingWidth="77.921875" />
-                    <SVGPath content="M1 6C1 5.17157 1.67157 4.5 2.5 4.5H78.5C79.3284 4.5 80 5.17157 80 6V26C80 26.8284 79.3284 27.5 78.5 27.5H2.5C1.67157 27.5 1 26.8284 1 26V6Z" styleClass="header-button" />
-                </children>
-            </Pane>
-        </graphic>
-        <tooltip>
-            <Tooltip id="cancelTooltip" text="%runtime.scenes.loginpassword.cancelTooltip" />
-        </tooltip>
-    </Button>
+        <Button id="exit" layoutX="30.0" layoutY="18.0" maxHeight="26.0" maxWidth="60.0" minHeight="26.0" minWidth="60.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" styleClass="wow">
+            <graphic>
+                <Pane id="backbutton" maxHeight="26.0" maxWidth="60.0" minHeight="26.0" minWidth="60.0" prefHeight="26.0" prefWidth="60.0">
+                    <children>
+                        <Text id="backtext" fontSmoothingType="LCD" layoutY="17.0" strokeType="OUTSIDE" text="Назад" textAlignment="CENTER" wrappingWidth="60.0" />
+                    </children>
+                </Pane>
+            </graphic>
+        </Button>
 
     <!-- Браузер -->
    <ScrollPane id="webview" layoutX="7.0" layoutY="63.0" prefHeight="332.0" prefWidth="586.0" />
+        </Pane>
 
     <!-- Подключение стилей-->
     <stylesheets>

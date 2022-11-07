@@ -8,9 +8,7 @@ import pro.gravit.launcher.client.gui.helper.LookupHelper;
 import pro.gravit.launcher.client.gui.overlays.AbstractOverlay;
 import pro.gravit.launcher.client.gui.scenes.login.LoginAuthButtonComponent;
 import pro.gravit.launcher.client.gui.scenes.login.LoginScene;
-import pro.gravit.launcher.request.auth.AuthRequest;
 import pro.gravit.launcher.request.auth.details.AuthLoginOnlyDetails;
-import pro.gravit.launcher.request.auth.details.AuthPasswordDetails;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -91,7 +89,7 @@ public class LoginOnlyAuthMethod extends AbstractAuthMethod<AuthLoginOnlyDetails
                 String rawLogin = login.getText();
                 future.complete(new LoginScene.LoginAndPasswordResult(rawLogin, null));
             });
-            LookupHelper.<ButtonBase>lookup(layout, "#header", "#controls", "#exit").setOnAction(e -> {
+            LookupHelper.<ButtonBase>lookup(layout, "#header", "#exit").setOnAction(e -> {
                 accessor.hideOverlay(0, null);
                 future.completeExceptionally(USER_AUTH_CANCELED_EXCEPTION);
             });

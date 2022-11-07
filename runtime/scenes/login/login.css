@@ -109,6 +109,17 @@ FluffyCuteOwO#6745 - DarkenGravitLauncherRuntime
 }
 /* end loginpassword.fxml */
 
+/* start logintotp.fxml */
+.field-auth {
+    -fx-background-color: #202020;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #444444;
+    -fx-font-family: "Manrope Regular";
+    -fx-cursor: text;
+}
+/* end logintotp.fxml */
+
 
 
 
